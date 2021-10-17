@@ -1,5 +1,28 @@
 body {
     margin: auto;
     width: 50%;
-    background-color: aqua;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    padding-bottom: 30px;
+}
+
+input[type=button] {
+    background-color: aquamarine;
+    width: 130px;
+    border-radius: 10px;
+    color: blueviolet;
+}
+
+#container div {
+    border-radius: 10px;
+    background-color: blueviolet;
+    color:chartreuse;
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -9,14 +9,15 @@ function add_new_manga() {
 function reset() {
     localStorage.clear()
 }
-localStorage.setItem('qsdsqdsqd' , "dddd.value")
 
 const add_manga = document.querySelector("#add_manga");
 add_manga.addEventListener("click", add_new_manga, false);
 
 Object.keys(localStorage).forEach(function(key){
     if (key.includes('manga')) {
+        document.querySelector("#container").innerHTML += "<div>"+localStorage.getItem(key)+"</div>"
         console.log(localStorage.getItem(key))
     }
  });
 
+console.log(parseInt(localStorage.length) + 1)
