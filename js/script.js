@@ -1,6 +1,12 @@
 var listing = document.querySelector("#listing")
 var number_manga = 0
 
+function reset() {
+    localStorage.clear()
+    
+    build_list()
+}
+
 function build_list() {
     listing.innerHTML = ""
     Object.keys(localStorage).forEach(function(key) {
@@ -24,10 +30,6 @@ function add_new_manga() {
     localStorage.setItem('manga_' + i, manga.value)
     manga.value = ""
     build_list()
-}
-
-function reset() {
-    localStorage.clear()
 }
 
 const add_manga = document.querySelector("#add_manga")

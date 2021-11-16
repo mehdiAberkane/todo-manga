@@ -3,6 +3,8 @@ body {
     width: 50%;
     padding: 10px;
     text-align: center;
+    background-color: black;
+    color: white;
 }
 
 h1 {
@@ -25,4 +27,12 @@ input[type=button] {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+li {
+    margin-bottom: 5px;
 }
