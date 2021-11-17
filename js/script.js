@@ -25,10 +25,14 @@ build_list()
 
 function add_new_manga() {
     const manga = document.querySelector("#manga")
+    const number_tomes = document.querySelector("#number_tomes")
     const i = parseInt(localStorage.length) + 1
+
+    console.log('nbr manga ' + number_tomes.value)
 
     localStorage.setItem('manga_' + i, manga.value)
     manga.value = ""
+    number_tomes.value = ""
     build_list()
 }
 
