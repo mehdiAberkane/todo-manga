@@ -11,10 +11,31 @@ function build_list() {
     listing.innerHTML = ""
     Object.keys(localStorage).forEach(function(key) {
         if (key.includes('manga')) {
-            const new_tag = document.createElement("li")
-            new_tag.innerHTML = localStorage.getItem(key)
+            let manga = JSON.parse(localStorage.getItem(key))
+
+            const new_tag = document.createElement("div")
+            const name_manga = document.createElement("h2")
+            name_manga.innerHTML = manga.name
+            new_tag.innerHTML = manga.name
             new_tag.classList = "list-group-item active"
-            
+
+            manga.number.forEach(nbr => {
+                let span_manga = document.createElement("span")
+                let label_manga = document.createElement("label")
+                let input_count = document.createElement("input")
+
+                label_manga.innerHTML = "Tome " + nbr
+                label_manga.setAttribute('for', manga.name + "_" + nbr)
+                input_count.setAttribute('type', 'checkbox')
+                input_count.setAttribute('value', nbr)
+                input_count.setAttribute('id', manga.name + "_" + nbr)
+                span_manga.setAttribute('class', 'span-manga')
+
+                span_manga.appendChild(label_manga)
+                span_manga.appendChild(input_count)
+                new_tag.appendChild(span_manga)
+            });
+
             listing.appendChild(new_tag)
             number_manga++
         }
@@ -28,9 +49,13 @@ function add_new_manga() {
     const number_tomes = document.querySelector("#number_tomes")
     const i = parseInt(localStorage.length) + 1
 
-    console.log('nbr manga ' + number_tomes.value)
+    var new_manga = {'name':manga.value, 'number': Array.from({length: number_tomes.value}, (_, i) => i + 1)};
+    console.log(new_manga)
+    localStorage.setItem('manga_' + i, JSON.stringify(new_manga));
+    
+    //var obj = JSON.parse(localStorage.user);
 
-    localStorage.setItem('manga_' + i, manga.value)
+    //reset form
     manga.value = ""
     number_tomes.value = ""
     build_list()

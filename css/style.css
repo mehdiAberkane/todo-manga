@@ -36,3 +36,8 @@ form {
 li {
     margin-bottom: 5px;
 }
+
+.span-manga {
+    width: 8em;
+    display: inline-block;
+}
