@@ -16,7 +16,8 @@ function build_list() {
             const new_tag = document.createElement("div")
             const name_manga = document.createElement("h2")
             name_manga.innerHTML = manga.name
-            new_tag.innerHTML = manga.name
+            name_manga.setAttribute('id', key)
+            new_tag.appendChild(name_manga)
             new_tag.classList = "list-group-item active"
 
             manga.number.forEach(nbr => {
@@ -29,6 +30,10 @@ function build_list() {
                 input_count.setAttribute('type', 'checkbox')
                 input_count.setAttribute('value', nbr)
                 input_count.setAttribute('id', manga.name + "_" + nbr)
+                input_count.onclick = function () {
+                    console.log(this.value)
+                    this.parentElement.remove(this);
+                };
                 span_manga.setAttribute('class', 'span-manga')
 
                 span_manga.appendChild(label_manga)
@@ -59,6 +64,10 @@ function add_new_manga() {
     manga.value = ""
     number_tomes.value = ""
     build_list()
+}
+
+function removeTome(manga_name, tombe_nbr) {
+
 }
 
 const add_manga = document.querySelector("#add_manga")
