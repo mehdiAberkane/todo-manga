@@ -16,7 +16,7 @@ function build_list() {
             const new_tag = document.createElement("div")
             const name_manga = document.createElement("h2")
             name_manga.innerHTML = manga.name
-            name_manga.setAttribute('id', key)
+            new_tag.setAttribute('id', key)
             new_tag.appendChild(name_manga)
             new_tag.classList = "list-group-item active"
 
@@ -30,12 +30,21 @@ function build_list() {
                 input_count.setAttribute('type', 'checkbox')
                 input_count.setAttribute('value', nbr)
                 input_count.setAttribute('id', manga.name + "_" + nbr)
+                
                 input_count.onclick = function () {
-                    console.log(this.value)
-                    this.parentElement.remove(this);
-                };
-                span_manga.setAttribute('class', 'span-manga')
+                    let manga_edit = JSON.parse(localStorage.getItem(this.parentElement.parentElement.getAttribute('id')))
 
+                    manga_edit['number'].forEach((element, index) =>{
+                        if (element == this.value) {
+                            manga_edit['number'].splice(index, 1)
+                        }
+                    })
+                    
+                    localStorage.setItem(this.parentElement.parentElement.getAttribute('id'), JSON.stringify(manga_edit));
+                    this.parentElement.remove(this)
+                };
+    
+                span_manga.setAttribute('class', 'span-manga')
                 span_manga.appendChild(label_manga)
                 span_manga.appendChild(input_count)
                 new_tag.appendChild(span_manga)
@@ -54,12 +63,9 @@ function add_new_manga() {
     const number_tomes = document.querySelector("#number_tomes")
     const i = parseInt(localStorage.length) + 1
 
-    var new_manga = {'name':manga.value, 'number': Array.from({length: number_tomes.value}, (_, i) => i + 1)};
-    console.log(new_manga)
-    localStorage.setItem('manga_' + i, JSON.stringify(new_manga));
+    var new_manga = {'name':manga.value, 'number': Array.from({length: number_tomes.value}, (_, i) => i + 1)}
+    localStorage.setItem('manga_' + i, JSON.stringify(new_manga))
     
-    //var obj = JSON.parse(localStorage.user);
-
     //reset form
     manga.value = ""
     number_tomes.value = ""
