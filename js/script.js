@@ -40,15 +40,15 @@ function build_list() {
                         }
                     })
                     
-                    localStorage.setItem(this.parentElement.parentElement.getAttribute('id'), JSON.stringify(manga_edit));
+                    localStorage.setItem(this.parentElement.parentElement.getAttribute('id'), JSON.stringify(manga_edit))
                     this.parentElement.remove(this)
-                };
+                }
     
                 span_manga.setAttribute('class', 'span-manga')
                 span_manga.appendChild(label_manga)
                 span_manga.appendChild(input_count)
                 new_tag.appendChild(span_manga)
-            });
+            })
 
             listing.appendChild(new_tag)
             number_manga++
@@ -70,10 +70,6 @@ function add_new_manga() {
     manga.value = ""
     number_tomes.value = ""
     build_list()
-}
-
-function removeTome(manga_name, tombe_nbr) {
-
 }
 
 const add_manga = document.querySelector("#add_manga")
