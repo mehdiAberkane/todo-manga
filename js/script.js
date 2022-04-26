@@ -33,15 +33,24 @@ function build_list() {
                 
                 input_count.onclick = function () {
                     let manga_edit = JSON.parse(localStorage.getItem(this.parentElement.parentElement.getAttribute('id')))
-
+                    
                     manga_edit['number'].forEach((element, index) =>{
                         if (element == this.value) {
                             manga_edit['number'].splice(index, 1)
                         }
                     })
+
+                    if (manga_edit['number'].length == 0) {
+                        localStorage.removeItem(this.parentElement.parentElement.getAttribute('id'))
+                    } else {
+                        localStorage.setItem(this.parentElement.parentElement.getAttribute('id'), JSON.stringify(manga_edit))
+                    }
                     
-                    localStorage.setItem(this.parentElement.parentElement.getAttribute('id'), JSON.stringify(manga_edit))
-                    this.parentElement.remove(this)
+                    if (this.parentElement.parentElement.getElementsByTagName('input').length == 1) {
+                        this.parentElement.parentElement.remove(this)
+                    } else {
+                        this.parentElement.remove(this)
+                    }
                 }
     
                 span_manga.setAttribute('class', 'span-manga')
@@ -53,7 +62,7 @@ function build_list() {
             listing.appendChild(new_tag)
             number_manga++
         }
-    });
+    })
 }
 
 build_list()
